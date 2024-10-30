@@ -1,0 +1,135 @@
+[
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Admin/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDto",
+        "Type": "waytodine_sem9.Controllers.admin.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "ForgetPassword",
+    "RelativePath": "api/Admin/forget-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "forgetPasswordDto",
+        "Type": "waytodine_sem9.Controllers.admin.ForgetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Admin/get-profile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "getprofiledto",
+        "Type": "waytodine_sem9.Controllers.admin.GetProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "Login",
+    "RelativePath": "api/Admin/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "adminLoginDto",
+        "Type": "waytodine_sem9.Controllers.admin.AdminLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "Register",
+    "RelativePath": "api/Admin/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDto",
+        "Type": "waytodine_sem9.Controllers.admin.AdminRegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "UpdateAdmin",
+    "RelativePath": "api/Admin/update-admin",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "adminUpdateDto",
+        "Type": "waytodine_sem9.Controllers.admin.AdminUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "VerifyOtp",
+    "RelativePath": "api/Admin/verify-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verifyOtpDto",
+        "Type": "waytodine_sem9.Controllers.admin.VerifyOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[waytodine_sem9.WeatherForecast, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
