@@ -102,6 +102,7 @@ F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\way
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.csproj.CoreCompileInputs.cache
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.MvcApplicationPartsAssemblyInfo.cs
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.MvcApplicationPartsAssemblyInfo.cache
+F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.sourcelink.json
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\staticwebassets.build.json
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\staticwebassets.development.json
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\staticwebassets\msbuild.waytodine_sem9.Microsoft.AspNetCore.StaticWebAssets.props

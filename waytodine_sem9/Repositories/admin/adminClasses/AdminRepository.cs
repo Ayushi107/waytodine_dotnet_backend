@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 using waytodine_sem9.Data;
 using waytodine_sem9.Models.admin;
 using waytodine_sem9.Repositories.admin.adminInterfaces;
@@ -25,7 +26,6 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             await _context.SaveChangesAsync();
             return admin;
         }
-
 
         public async Task<Admin> UpdateAdmin(Admin admin)
         {
@@ -70,9 +70,60 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<Admin> GetAdmin()
+        {
+            return await _context.Admins.FirstOrDefaultAsync();
+        }
 
-      
+        public async Task<bool> GetRestaurantById(int id)
+        {
+            //return await _context.Restaurants.SingleOrDefaultAsync(a => a.Id == id);
+            return true;
+        }
+        public async Task<bool> GetDeliveryPersonById(int id)
+        {
+            //return await _context.Restaurants.SingleOrDefaultAsync(a => a.Id == id);
+            return true;
+        }
 
-       
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.UserEntities.SingleOrDefaultAsync(a => a.Email == email);
+        }
+
+        public async Task<string> VerifyRestaurant(int id)
+        {
+            var restaurant = await _context.restaurants
+                  .FirstOrDefaultAsync(r => r.RestaurantId == id);
+            if (restaurant == null)
+            {
+                return null; 
+            }
+            restaurant.Status = 1;
+            _context.restaurants.Update(restaurant);
+            await _context.SaveChangesAsync();
+            string email = restaurant.Email;
+            return email;
+
+
+        }
+
+        public async Task<string> VerifyDriver(int id)
+        {
+            var driver = await _context.DeliveryPerson
+                  .FirstOrDefaultAsync(r => r.DeliveryPersonId == id);
+            if (driver == null)
+            {
+                return null;
+            }
+            //driver.Status = 1;
+            _context.DeliveryPerson.Update(driver);
+            await _context.SaveChangesAsync();
+            string email = driver.DriverEmail;
+            return email;
+
+        }
+
+
     }
 }

@@ -127,14 +127,109 @@ namespace waytodine_sem9.Services.admin.adminClasses
             return await _adminRepository.UpdatePassword(changePasswordDto.UserName, changePasswordDto.NewPassword);
         }
 
-        public async Task<Admin> GetProfileAsync(string username)
+        public async Task<Admin> GetProfileAsync()
         {
-            return await _adminRepository.GetAdminByUsername(username);
+            return await _adminRepository.GetAdmin();
         }
 
         private string GenerateOtp()
         {
             return new Random().Next(100000, 999999).ToString();
         }
+
+        public async Task<bool> VerifyRestaurantUser(int res_id)
+        {
+            var restaurantUSer = await _adminRepository.GetRestaurantById(res_id);
+            if (restaurantUSer == null)
+            {
+                return false;
+            }
+            //await _emailService.SendEmailAsync(restaurantUSer.Id, "You can now register to the dashboard");
+            return true;
+        }
+
+        public async Task<bool> VerifyDeliveryPerson(int del_id)
+        {
+            var deliveryPerson = await _adminRepository.GetDeliveryPersonById(del_id);
+            if(deliveryPerson == null)
+            {
+                return false;
+            }
+            //await _emailService.SendEmailAsync(restaurantUSer.Id, "You can now register to the dashboard");
+            return true;
+        }
+
+
+        public async Task<bool> VerifyRestaurantAsync(int resid)
+        {
+            var email = await _adminRepository.VerifyRestaurant(resid);
+            if (email == null)
+            {
+                return false;
+            }
+            else
+            {
+                string loginUrl = "https://localhost:3000";
+                const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                Random random = new Random();
+
+                // Generate a random number
+                string numericPart = random.Next(100000, 999999).ToString();
+
+                // Add random characters to the code
+                string charPart = new string(Enumerable.Repeat(validChars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                string password = numericPart + charPart;
+
+                string emailMessage = $@"
+                {email}
+                <h3>Welcome to Our Platform!</h3>
+                <p>Your account has been verified and you can now log in.</p>
+                <p><b>Login Link:</b> <a href='{loginUrl}'>{loginUrl}</a></p>
+                <p><b>Your Temporary Password:</b> {password}</p>
+                <p>We recommend changing your password after logging in.</p>
+                ";
+
+                await _emailService.SendEmailAsync(email, "Verification update", emailMessage);
+                return true;
+            }
+        }
+
+
+        public async Task<bool> VerifyDriverAsync(int driverid)
+        {
+            var email = await _adminRepository.VerifyDriver(driverid);
+            if (email == null)
+            {
+                return false;
+            }
+            else
+            {
+                string loginUrl = "https://localhost:3000";
+                const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                Random random = new Random();
+
+                // Generate a random number
+                string numericPart = random.Next(100000, 999999).ToString();
+
+                // Add random characters to the code
+                string charPart = new string(Enumerable.Repeat(validChars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                string password = numericPart + charPart;
+
+                string emailMessage = $@"
+                {email}
+                <h3>Welcome to Our Platform!</h3>
+                <p>Your account has been verified and you can now log in.</p>
+                <p><b>Login Link:</b> <a href='{loginUrl}'>{loginUrl}</a></p>
+                <p><b>Your Temporary Password:</b> {password}</p>
+                <p>We recommend changing your password after logging in.</p>
+                ";
+
+                await _emailService.SendEmailAsync(email, "Verification update", emailMessage);
+                return true;
+            }
+        }
+
     }
 }

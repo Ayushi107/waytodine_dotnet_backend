@@ -38,13 +38,7 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "getprofiledto",
-        "Type": "waytodine_sem9.Controllers.admin.GetProfileDto",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -106,6 +100,422 @@
       {
         "Name": "verifyOtpDto",
         "Type": "waytodine_sem9.Controllers.admin.VerifyOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "VerifyDelivery",
+    "RelativePath": "api/Admin/verify/delivery",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verificationIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.VerificationIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "VerifyRestaurant",
+    "RelativePath": "api/Admin/verify/restaurant",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verificationIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.VerificationIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "VerifyResUser",
+    "RelativePath": "api/Admin/verify/restaurant-user",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verificationIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.VerificationIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.CategoryController",
+    "Method": "AddCategory",
+    "RelativePath": "api/Category/add-category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryDto",
+        "Type": "waytodine_sem9.Controllers.admin.CategoryController\u002BCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.CategoryController",
+    "Method": "DeleteCategory",
+    "RelativePath": "api/Category/delete-category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "getCategoryByIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.CategoryController\u002BGetCategoryByIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.CategoryController",
+    "Method": "GetAllCategories",
+    "RelativePath": "api/Category/get-categories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.CategoryController\u002BPaginationCatDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.CategoryController",
+    "Method": "UpdateAdmin",
+    "RelativePath": "api/Category/update-category",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryUpdateDto",
+        "Type": "waytodine_sem9.Controllers.admin.CategoryController\u002BCategoryUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "AcceptOrDeclineOrder",
+    "RelativePath": "api/Driver/accept-decline-order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "acceptDeclineDto",
+        "Type": "waytodine_sem9.Controllers.driver.AcceptDeclineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "VerifyOtp",
+    "RelativePath": "api/Driver/confirm-delivery",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "otpDto",
+        "Type": "waytodine_sem9.Controllers.driver.OtpVerificationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GenerateOtp",
+    "RelativePath": "api/Driver/generate-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderid",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GetAcceptedOrders",
+    "RelativePath": "api/Driver/get-accepted-orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverIdDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GetAssignedOrders",
+    "RelativePath": "api/Driver/get-assigned-orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverIdDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GetDeliveredOrders",
+    "RelativePath": "api/Driver/get-delivered-orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverIdDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/Driver/get-order-details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Driver/get-profile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverIdDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "Login",
+    "RelativePath": "api/Driver/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverLoginDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "UpdateDriverAvailabilityStatus",
+    "RelativePath": "api/Driver/update-availability-status",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverIdDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetAllDrivers",
+    "RelativePath": "api/Listing/get-Drivers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetMenus",
+    "RelativePath": "api/Listing/get-Menus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Listing/get-orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetAllRestaurants",
+    "RelativePath": "api/Listing/get-Restaurants",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Listing/get-Users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paginationDto",
+        "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.SearchingController",
+    "Method": "SearchMenus",
+    "RelativePath": "api/Searching/search-menus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchiOdersDto",
+        "Type": "waytodine_sem9.Controllers.admin.SearchiOdersDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.SearchingController",
+    "Method": "SearchOrders",
+    "RelativePath": "api/Searching/search-orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchiOdersDto",
+        "Type": "waytodine_sem9.Controllers.admin.SearchiOdersDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.SearchingController",
+    "Method": "SearchRestaurants",
+    "RelativePath": "api/Searching/search-restaurants",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchiOdersDto",
+        "Type": "waytodine_sem9.Controllers.admin.SearchiOdersDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.SearchingController",
+    "Method": "SearchUsers",
+    "RelativePath": "api/Searching/search-users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchiOdersDto",
+        "Type": "waytodine_sem9.Controllers.admin.SearchiOdersDto",
         "IsRequired": true
       }
     ],

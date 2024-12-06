@@ -5,8 +5,12 @@ using System.Text;
 using waytodine_sem9.Data;
 using waytodine_sem9.Repositories.admin.adminClasses;
 using waytodine_sem9.Repositories.admin.adminInterfaces;
+using waytodine_sem9.Repositories.driver.driverClasses;
+using waytodine_sem9.Repositories.driver.driverInterfaces;
 using waytodine_sem9.Services.admin.adminClasses;
 using waytodine_sem9.Services.admin.adminInterfaces;
+using waytodine_sem9.Services.driver.driverClasses;
+using waytodine_sem9.Services.driver.driverInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,13 +33,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IListingRepository, ListingRepository>();
+builder.Services.AddScoped<IListingService, ListingService>();
+builder.Services.AddScoped<ISearchingRepository, SearchingRepository>();
+builder.Services.AddScoped<ISearchingService, SearchingService>();
+builder.Services.AddScoped<IdriverRepository, driverRepository>();
+builder.Services.AddScoped<IdriverService, driverService>();
+
+
 
 
 
 // Add services to the container.
 builder.Services.AddMemoryCache();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+      .AddJsonOptions(options =>
+       {
+           options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+           options.JsonSerializerOptions.WriteIndented = true;
+       });
 
 
 builder.Services.AddAuthentication(options =>

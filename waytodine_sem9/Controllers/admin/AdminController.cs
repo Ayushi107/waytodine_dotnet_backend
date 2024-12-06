@@ -90,14 +90,68 @@ namespace waytodine_sem9.Controllers.admin
 
 
         [HttpPost("get-profile")]
-        public async Task<IActionResult> GetProfile(GetProfileDto getprofiledto)
+        public async Task<IActionResult> GetProfile()
         {
-            var username = getprofiledto.Username;
-            var adminProfile = await _adminService.GetProfileAsync(username);
+            var adminProfile = await _adminService.GetProfileAsync();
             return adminProfile == null ? NotFound("Admin not found.") : Ok(adminProfile);
         }
 
 
+        [HttpPost("verify/restaurant")]
+        public async Task<IActionResult> VerifyRestaurant([FromBody] VerificationIdDto verificationIdDto)
+        {
+            var result = await _adminService.VerifyRestaurantUser(verificationIdDto.VerificationId);
+            if (!result)
+            {
+                return NotFound("Restaurant user not found or verification failed.");
+            }
+
+            return Ok("Verification email sent successfully.");
+        }
+
+        [HttpGet("verify/delivery")]
+        public async Task<IActionResult> VerifyDelivery([FromBody] VerificationIdDto verificationIdDto)
+        {
+            var result = await _adminService.VerifyDeliveryPerson(verificationIdDto.VerificationId);
+            if (!result)
+            {
+                return NotFound("Delivery person not found or verification failed.");
+            }
+
+            return Ok("Verification email sent successfully.");
+        }
+
+        [HttpPost("verify/restaurant-user")]
+        public async Task<IActionResult> VerifyResUser([FromBody] VerificationIdDto verificationIdDto)
+        {
+            var result = await _adminService.VerifyRestaurantAsync(verificationIdDto.VerificationId);
+            if(result)
+            {
+                return Ok("You are verified");
+            }
+            else
+            {
+                return NotFound("Something went wrong while verifiying, check your email");
+            }
+
+
+        }
+
+        [HttpPost("verify/driver-user")]
+        public async Task<IActionResult> VerifyDriverUser([FromBody] VerificationIdDto verificationIdDto)
+        {
+            var result = await _adminService.VerifyDriverAsync(verificationIdDto.VerificationId);
+            if (result)
+            {
+                return Ok("You are verified");
+            }
+            else
+            {
+                return NotFound("Something went wrong while verifiying, check your email");
+            }
+
+
+        }
     }
 
 
@@ -154,5 +208,9 @@ namespace waytodine_sem9.Controllers.admin
         public string UserName { get; set; }
     }
 
+    public class VerificationIdDto
+    {
+        public int VerificationId { get; set; }
+    }
    
 }

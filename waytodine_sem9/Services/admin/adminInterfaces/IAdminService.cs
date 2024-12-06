@@ -11,6 +11,11 @@ namespace waytodine_sem9.Services.admin.adminInterfaces
         Task<string> ForgetPasswordAsync(ForgetPasswordDto forgetPasswordDto);
         Task<bool> VerifyOtpAsync(VerifyOtpDto verifyOtpDto);
         Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
-        Task<Admin> GetProfileAsync(string username);
+        Task<Admin> GetProfileAsync();
+        Task<bool> VerifyRestaurantUser(int res_id);
+        Task<bool> VerifyDeliveryPerson(int del_id);
+        Task<bool> VerifyRestaurantAsync(int resid);
+        Task<bool> VerifyDriverAsync(int driverid);
+
     }
 }
