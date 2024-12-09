@@ -1,0 +1,22 @@
+# Use the official .NET SDK image to build the application
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /app
+
+# Copy the project files and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy the rest of the application code and build the release
+COPY . ./
+RUN dotnet publish -c Release -o /app/publish
+
+# Use the runtime image for running the application
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=build /app/publish .
+
+# Expose the port your application runs on (e.g., 5000)
+EXPOSE 5000
+
+# Set the entry point to run the application
+ENTRYPOINT ["dotnet", "waytodine_sem9.dll"]
