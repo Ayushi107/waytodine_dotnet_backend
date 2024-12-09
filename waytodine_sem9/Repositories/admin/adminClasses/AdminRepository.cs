@@ -116,7 +116,7 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             {
                 return null;
             }
-            //driver.Status = 1;
+            driver.Status = 1;
             _context.DeliveryPerson.Update(driver);
             await _context.SaveChangesAsync();
             string email = driver.DriverEmail;

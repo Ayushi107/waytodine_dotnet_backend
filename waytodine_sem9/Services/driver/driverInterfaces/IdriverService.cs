@@ -1,4 +1,5 @@
-﻿using waytodine_sem9.Models.admin;
+﻿using waytodine_sem9.Controllers.driver;
+using waytodine_sem9.Models.admin;
 
 namespace waytodine_sem9.Services.driver.driverInterfaces
 {
@@ -16,6 +17,9 @@ namespace waytodine_sem9.Services.driver.driverInterfaces
         Task<ICollection<Order>> GetDeliveredOrdersAsync(int driverid);
         Task<Order> GetOrderDetailsAsync(int orderid);
         Task<bool> VerifyOtpAndConfirmDelivery(int orderid, int driverid, string enteredOtp);
+
+        //Task<object> GetDriverForLoginAsync(string username);
+
 
     }
 }

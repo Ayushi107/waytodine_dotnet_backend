@@ -3,43 +3,59 @@ using System.ComponentModel.DataAnnotations;
 
 namespace waytodine_sem9.Models.admin
 {
+    [Table("delivery_person", Schema = "public")]
     public class DeliveryPerson
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("delivery_person_id")]
         public int DeliveryPersonId { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
 
         [Required]
+        [Column("vehicle_type")]
         public string VehicleType { get; set; }
 
         [Required]
+        [Column("vehicle_number")]
         public string VehicleNumber { get; set; }
 
+        [Column("status")]
+        public int Status { get; set; } = 0;
+
         [Required]
+        [Column("driving_license_number")]
         public string DrivingLicenseNumber { get; set; }
 
-        public Boolean IsAvailable { get; set; }=false;
+        [Column("is_available")]
+        public Boolean IsAvailable { get; set; } = false;
 
         [Required]
+        [Column("license_document")]
         public string LicenseDocument { get; set; }
 
+        [Column("driver_name")]
         public string DriverName { get; set; }
-        public string DriverEmail { get; set; } 
+
+        [Column("driver_email")]
+        public string DriverEmail { get; set; }
+
+        [Column("phone")]
         public string Phone { get; set; }
+
+        [Column("password")]
         public string Password { get; set; }
 
+        [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation Properties
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+
         public ICollection<Order> Orders { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-        public ICollection<Tracking> Trackings { get; set; }
+
 
         // remove all this user orders review trackings
     }

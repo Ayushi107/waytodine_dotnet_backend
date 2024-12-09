@@ -22,10 +22,10 @@ namespace waytodine_sem9.Models.admin
         public string Description { get; set; }
 
         [Column("status")]
-        private int status { get; set; }
+        public int status { get; set; }
 
         [Column("category_image")]
-        private string categoryImage {  get; set; }
+        public string categoryImage {  get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

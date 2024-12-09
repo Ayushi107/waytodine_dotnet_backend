@@ -1,33 +1,52 @@
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using waytodine_sem9.Data;
+using waytodine_sem9.MansiData;
 using waytodine_sem9.Repositories.admin.adminClasses;
 using waytodine_sem9.Repositories.admin.adminInterfaces;
 using waytodine_sem9.Repositories.driver.driverClasses;
 using waytodine_sem9.Repositories.driver.driverInterfaces;
+using waytodine_sem9.Repositories.restaurant.resClasses;
+using waytodine_sem9.Repositories.restaurant.resInterfaces;
 using waytodine_sem9.Services.admin.adminClasses;
 using waytodine_sem9.Services.admin.adminInterfaces;
 using waytodine_sem9.Services.driver.driverClasses;
 using waytodine_sem9.Services.driver.driverInterfaces;
+using waytodine_sem9.Services.restaurant.resClasses;
+using waytodine_sem9.Services.restaurant.resInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton(serviceProvider =>
+{
+    var config = builder.Configuration.GetSection("Cloudinary");
+    var cloudinaryAccount = new Account(
+        config["CloudName"],
+        config["ApiKey"],
+        config["ApiSecret"]
+    );
+    return new Cloudinary(cloudinaryAccount);
+});
 
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Allow", policyBuilder =>
     {
-        policyBuilder.WithOrigins("http://localhost:3000")
+        policyBuilder.WithOrigins("*")
                      .AllowAnyMethod()
-                     .AllowAnyHeader()
-                     .AllowCredentials();
+                     .AllowAnyHeader();
+                     //.AllowCredentials();
 
     });
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContextMansi>(options =>
+ options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
@@ -41,6 +60,12 @@ builder.Services.AddScoped<ISearchingRepository, SearchingRepository>();
 builder.Services.AddScoped<ISearchingService, SearchingService>();
 builder.Services.AddScoped<IdriverRepository, driverRepository>();
 builder.Services.AddScoped<IdriverService, driverService>();
+
+builder.Services.AddScoped<IResRepository, ResRepository>();
+builder.Services.AddScoped<IResService, ResService>();
+builder.Services.AddScoped<IOrderService, OderService>();
+builder.Services.AddScoped<IMenuItemService, MenuItemService>();
+
 
 
 
@@ -88,6 +113,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+//app.UseStaticFiles();
 
 // Ensure CORS is set up before authorization
 app.UseCors("Allow");

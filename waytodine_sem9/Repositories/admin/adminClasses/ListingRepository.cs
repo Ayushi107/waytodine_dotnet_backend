@@ -37,12 +37,76 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         public async Task<object> GetAllOrders(int pageNumber, int pageSize)
         {
             var totalRecords = await _context.Order.CountAsync();
+
             var orders = await _context.Order
                 .Include(o => o.Restaurant)
-                .Include(o=>o.Customer)
+                .Include(o => o.Customer)
+                .Include(o => o.CartItems)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .Select(o => new
+                {
+                    o.OrderId,
+                    o.CustomerId,
+                    o.RestaurantId,
+                    o.DeliveryPersonId,
+                    o.TotalAmount,
+                    o.Discount,
+                    o.OrderStatus,
+                    o.PaymentStatus,
+                    o.IsAccept,
+                    o.CreatedAt,
+                    o.UpdatedAt,
+                    Restaurant = new
+                    {
+                        o.Restaurant.RestaurantId,
+                        o.Restaurant.Name,
+                        o.Restaurant.Email,
+                        o.Restaurant.PhoneNumber,
+                        o.Restaurant.Location,
+                        o.Restaurant.City,
+                        o.Restaurant.Country,
+                        o.Restaurant.Status,
+                        o.Restaurant.CreatedAt,
+                        o.Restaurant.UpdatedAt
+                    },
+                    Customer = new
+                    {
+                        o.Customer.UserId,
+                        o.Customer.FirstName,
+                        o.Customer.LastName,
+                        o.Customer.Email,
+                        o.Customer.PhoneNumber,
+                        o.Customer.Status,
+                        o.Customer.Location,
+                        o.Customer.ProfilePic,
+                        o.Customer.CreatedAt,
+                        o.Customer.UpdatedAt
+                    },
+                    CartItems = _context.CartItems
+                .Where(c => c.OrderId == o.OrderId)
+                .Select(c => new
+                {
+                    c.CartId,
+                    c.CustomerId,
+                    c.Quantity,
+                    c.Status,
+                    c.Total,
+                    c.ItemId,
+                    c.RestaurantId,
+                    c.CreatedAt,
+                    c.UpdatedAt,
+                    Item = new
+                    {
+                        c.Items.ItemId,
+                        c.Items.Name,
+                        c.Items.Price,
+                        c.Items.Description,
+                        c.Items.ItemImage
+                    }
+                }).ToList()
+                })
+        .ToListAsync();
 
             return new
             {
@@ -53,6 +117,7 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                 Data = orders
             };
         }
+
 
         public async Task<object> GetAllUsers(int pageNumber, int pageSize)
         {
@@ -77,8 +142,24 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         {
             var totalRecords = await _context.MenuItem.CountAsync();
             var menus = await _context.MenuItem
+                .Include(m=>m.Category)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                .Select(m => new
+                {
+                    m.ItemId,
+                    m.Name,
+                    m.Description,
+                    m.Price,
+                    m.ItemImage,
+                    m.Status,
+                    m.IsVeg,
+                    Category = new
+                    {
+                        m.Category.CategoryId,
+                        m.Category.CategoryName,
+                    }
+                })
                 .ToListAsync();
 
             return new

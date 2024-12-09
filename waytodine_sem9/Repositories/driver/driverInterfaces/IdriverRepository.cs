@@ -16,5 +16,8 @@ namespace waytodine_sem9.Repositories.driver.driverInterfaces
         Task<Order> GetOrderDetails(int orderid);
         Task<DeliveryPerson> GetDriverById(int driverid);
         Task<string> UpdateOrderStatus(int orderid);
+
+        Task<DeliveryPerson> GetDriverForLogin(string username);
     }
+
 }

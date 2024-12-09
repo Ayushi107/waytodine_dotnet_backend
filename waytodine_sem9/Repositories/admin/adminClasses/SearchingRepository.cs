@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using waytodine_sem9.Data;
+using waytodine_sem9.Models.admin;
 using waytodine_sem9.Repositories.admin.adminInterfaces;
 
 namespace waytodine_sem9.Repositories.admin.adminClasses
@@ -18,19 +19,66 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
          .Include(o => o.Restaurant)
          .Include(o => o.Customer)
          .Include(o => o.DeliveryPerson)
-         .Where(o => o.Restaurant.Name.Contains(restaurantName))
+         .Include(o=>o.CartItems)
+         .Where(o => o.Restaurant.Name.ToLower().Contains(restaurantName.ToLower()))
          .Select(o => new
           {
               o.OrderId, 
               o.TotalAmount,
               o.OrderStatus, 
-              o.PaymentStatus, 
-              o.Restaurant, 
-              CustomerName = o.Customer != null ? o.Customer.FirstName + " " + o.Customer.LastName : null, 
-              //DeliveryPersonName = o.DeliveryPerson != null ? o.DeliveryPerson. : null,
-              o.CustomerId, // Customer ID
+              o.PaymentStatus,
+             Restaurant = new
+             {
+                 o.Restaurant.RestaurantId,
+                 o.Restaurant.Name,
+                 o.Restaurant.Email,
+                 o.Restaurant.PhoneNumber,
+                 o.Restaurant.Location,
+                 o.Restaurant.City,
+                 o.Restaurant.Country,
+                 o.Restaurant.Status,
+                 o.Restaurant.CreatedAt,
+                 o.Restaurant.UpdatedAt
+             },
+             CartItems = _context.CartItems
+                .Where(c => c.OrderId == o.OrderId)
+                .Select(c => new
+                {
+                    c.CartId,
+                    c.CustomerId,
+                    c.Quantity,
+                    c.Status,
+                    c.Total,
+                    c.ItemId,
+                    c.RestaurantId,
+                    c.CreatedAt,
+                    c.UpdatedAt,
+                    Item = new
+                    {
+                        c.Items.ItemId,
+                        c.Items.Name,
+                        c.Items.Price,
+                        c.Items.Description,
+                        c.Items.ItemImage
+                    }
+                }).ToList(),
+             Customer = new
+             {
+                 o.Customer.UserId,
+                 o.Customer.FirstName,
+                 o.Customer.LastName,
+                 o.Customer.Email,
+                 o.Customer.PhoneNumber,
+                 o.Customer.Status,
+                 o.Customer.Location,
+                 o.Customer.ProfilePic,
+                 o.Customer.CreatedAt,
+                 o.Customer.UpdatedAt
+             },
+             //DeliveryPersonName = o.DeliveryPerson != null ? o.DeliveryPerson. : null,
+             o.CustomerId, // Customer ID
               o.DeliveryPersonId, // Delivery person ID
-              o.Customer 
+             
           });
 
 
@@ -44,21 +92,34 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
 
         public async Task<(IEnumerable<object> Menus, int TotalRecords)> SearchMenusAsync(string restaurantName, int pageNumber, int pageSize)
         {
+
             var query = _context.MenuItem
-         .Include(o => o.Restaurant)
-         .Include(o => o.Category)
-         .Where(o => o.Restaurant.Name.Contains(restaurantName))
-         .Select(o => new
-         {
-             o.ItemId,
-             o.Name,
-             o.Description,
-             o.Status,
-             o.IsVeg,
-             o.Price,
-             o.Category.CategoryId,
-             o.Restaurant
-         });
+                .Include(o => o.Restaurant)  // Include Restaurant data
+                .Include(o => o.Category)    // Include Category data
+                .Where(o => o.Name.ToLower().Contains(restaurantName.ToLower())) // Search filter for restaurantName
+                .Select(o => new
+                {
+                    o.ItemId,
+                    o.Name,
+                    o.Description,
+                    o.Price,
+                    o.ItemImage,
+                    o.Status,
+                    o.IsVeg,
+                    // Include Category details
+                    Category = new
+                    {
+                        o.Category.CategoryId,
+                        o.Category.CategoryName,
+                    },
+                    // Include Restaurant details
+                    Restaurant = new
+                    {
+                        o.Restaurant.RestaurantId,
+                        o.Restaurant.Name,
+                        o.Restaurant.Location
+                    }
+                });
 
 
             int totalRecords = await query.CountAsync();
@@ -72,7 +133,7 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         public async Task<(IEnumerable<object> Users, int TotalRecords)> SearchUsersAsync(string userName, int pageNumber, int pageSize)
         {
             var query = _context.UserEntities
-         .Where(o => o.FirstName.Contains(userName))
+         .Where(o => o.FirstName.ToLower().Contains(userName.ToLower()))
          .Select(o => new
          {
              o.UserId,
@@ -96,7 +157,7 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         public async Task<(IEnumerable<object> Restaurants, int TotalRecords)> SearchRestaurantsAsync(string restaurantName, int pageNumber, int pageSize)
         {
             var query = _context.restaurants
-         .Where(o => o.Name.Contains(restaurantName))
+         .Where(o => o.Name.ToLower().Contains(restaurantName.ToLower()))
          .Select(o => new
          {
              o.RestaurantId,

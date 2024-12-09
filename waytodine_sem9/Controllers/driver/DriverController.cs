@@ -42,10 +42,10 @@ namespace waytodine_sem9.Controllers.driver
         public async Task<IActionResult> Login([FromBody] DriverLoginDto driverLoginDto)
         {
             var token = await _driverService.LoginAsync(driverLoginDto.Username, driverLoginDto.Password);
-            if (token == null)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
+            //if (token == null)
+            //{
+            //    return Unauthorized("Invalid username or password.");
+            //}
             return Ok(new { Token = token });
         }
 

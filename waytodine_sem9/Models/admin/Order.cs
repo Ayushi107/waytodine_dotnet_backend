@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace waytodine_sem9.Models.admin
 {
@@ -40,10 +41,21 @@ namespace waytodine_sem9.Models.admin
             [Column("payment_status")]
             public int PaymentStatus { get; set; } = 1;  // 1 = pending, 2 = completed, 3 = failed
 
-        [Column("isAccept")]
+        [Column("is_accept")]
         public Boolean IsAccept { get; set; } = false;
+        [Column("pickup_location")]
+        private String pickupLocation;  // Geography/Point type
 
-            [Column("created_at")]
+        [Column("dropoff_location")]
+        private String dropoffLocation; // Geography/Point type
+
+        [Column("pickup_city")]
+        private String pickupCity;      // New field for pickup city
+
+        [Column("dropoff_city")]
+        private String dropoffCity;     // New field for dropoff city
+
+        [Column("created_at")]
             public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
             [Column("updated_at")]
@@ -58,6 +70,9 @@ namespace waytodine_sem9.Models.admin
 
             [ForeignKey("DeliveryPersonId")]
             public DeliveryPerson DeliveryPerson { get; set; }
+
+
+        public ICollection<Cart> CartItems {  get; set; }
 
 
         }

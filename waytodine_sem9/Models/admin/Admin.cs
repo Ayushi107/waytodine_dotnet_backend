@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace waytodine_sem9.Models.admin
 {
+    [Table("admin", Schema = "public")]
     public class Admin
     {
         [Key]

@@ -16,6 +16,7 @@ namespace waytodine_sem9.Data
         public DbSet<DeliveryPerson> DeliveryPerson{ get; set; }
         public DbSet<RestaurantDetails> RestaurantDetails { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<Cart> CartItems {  get; set; }
 
 
     }

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
@@ -19,15 +20,6 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\restaurant\" />
-    <Folder Include="Models\restaurant\" />
-    <Folder Include="Repositories\restaurant\resInterfaces\" />
-    <Folder Include="Repositories\restaurant\resClasses\" />
-    <Folder Include="Services\restaurant\resClasses\" />
-    <Folder Include="Services\restaurant\resInterfaces\" />
   </ItemGroup>
 
 </Project>

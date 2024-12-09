@@ -50,14 +50,14 @@ namespace waytodine_sem9.Services.admin.adminClasses
             //    BankIfscCode = "4567890p",
             //    RazorpayAccountId = "4567890"
             //};
-            var category = new Category
-            {
-                CategoryName = categoryDto.Name,
-                Description = categoryDto.Description,
-                //RestaurantId = categoryDto.RestaurantId
+            //var category = new Category
+            //{
+            //    CategoryName = categoryDto.Name,
+            //    Description = categoryDto.Description,
+            //    //RestaurantId = categoryDto.RestaurantId
                
-            };
-            return await _categoryRepository.CreateCategory(category);
+            //};
+            return await _categoryRepository.CreateCategory(categoryDto);
         }
 
         public async Task<bool> UpdateCategoryAsync(CategoryUpdateDto categoryUpdateDto)

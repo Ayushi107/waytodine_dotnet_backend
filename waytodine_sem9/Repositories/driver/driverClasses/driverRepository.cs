@@ -24,8 +24,7 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
 
         public async Task<DeliveryPerson> GetByUsernameAndPasswordAsync(string username, string password)
         {
-            var driver = await _context.DeliveryPerson.FirstOrDefaultAsync(a => a.DriverName == username &&
-                                  a.Password == password);
+            var driver = await _context.DeliveryPerson.FirstOrDefaultAsync(a => a.DriverName == username && a.Password == password);
             return driver;
         }
 
@@ -49,7 +48,7 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
 
         public async Task<ICollection<Order>> GetAssignedOrders(int driverid)
         {
-            var assignedOrders = await _context.Order.Include(o=> o.Customer).Include(o=>o.Restaurant).Where(o => o.DeliveryPersonId == driverid).ToListAsync();
+            var assignedOrders = await _context.Order.Include(o=> o.Customer).Include(o=>o.Restaurant).Include(o=>o.CartItems).Where(o => o.DeliveryPersonId == driverid).ToListAsync();
             return assignedOrders;
         }
 
@@ -79,14 +78,20 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
 
         public async Task<ICollection<Order>> GetAcceptedOrders(int driverid)
         {
-            var acceptedOrders = await _context.Order.Include(o => o.Customer).Include(o => o.Restaurant).Where(o => o.DeliveryPersonId == driverid && o.IsAccept == true).ToListAsync();
+            var acceptedOrders = await _context.Order
+                .Include(o => o.Customer)
+                .Include(o => o.Restaurant)
+                .Include(o => o.CartItems)
+                .Where(o => o.DeliveryPersonId == driverid && o.IsAccept == true).ToListAsync();
+
+                
             return acceptedOrders;
         }
 
 
         public async Task<ICollection<Order>> GetDeliveredOrders(int driverid)
         {
-            var deliveredOrders = await _context.Order.Include(o => o.Customer).Include(o => o.Restaurant).Where(o => o.DeliveryPersonId == driverid && o.IsAccept == true && o.OrderStatus == 4).ToListAsync();
+            var deliveredOrders = await _context.Order.Include(o => o.Customer).Include(o => o.Restaurant).Include(o => o.CartItems).Where(o => o.DeliveryPersonId == driverid && o.IsAccept == true && o.OrderStatus == 4).ToListAsync();
             return deliveredOrders;
         }
 
@@ -96,6 +101,7 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
              .Include(o => o.DeliveryPerson) // Include related DeliveryPerson data
              .Include(o => o.Restaurant) // Include related Restaurant data
              .Include(o => o.Customer) // Include related Customer data
+             .Include(o=>o.CartItems)
              .FirstOrDefaultAsync(o => o.OrderId == orderid);
 
             // Return the order details or null if not found
@@ -119,6 +125,15 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
             await _context.SaveChangesAsync();
             return "Order status updated";
         }
+
+
+
+        public async Task<DeliveryPerson> GetDriverForLogin(string username)
+        {
+            var driver = await _context.DeliveryPerson.FirstOrDefaultAsync(d=>d.DriverName== username );
+            return driver;
+        }
+
 
 
     }

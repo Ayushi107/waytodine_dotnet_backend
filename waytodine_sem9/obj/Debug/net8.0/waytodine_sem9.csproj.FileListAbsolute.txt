@@ -117,3 +117,6 @@ F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\ref
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.pdb
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\waytodine_sem9.genruntimeconfig.cache
 F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\obj\Debug\net8.0\ref\waytodine_sem9.dll
+F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\bin\Debug\net8.0\waytodine_sem9.staticwebassets.runtime.json
+F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\bin\Debug\net8.0\CloudinaryDotNet.dll
+F:\MscIT\sem9\Project\Backend\waytodine_sem9\waytodine_sem9\bin\Debug\net8.0\Newtonsoft.Json.dll

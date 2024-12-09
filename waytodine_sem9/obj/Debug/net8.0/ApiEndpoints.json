@@ -123,6 +123,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
+    "Method": "VerifyDriverUser",
+    "RelativePath": "api/Admin/verify/driver-user",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verificationIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.VerificationIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.AdminController",
     "Method": "VerifyRestaurant",
     "RelativePath": "api/Admin/verify/restaurant",
     "HttpMethod": "POST",
@@ -452,6 +468,429 @@
       {
         "Name": "paginationDto",
         "Type": "waytodine_sem9.Controllers.admin.PaginationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllRestaurants",
+    "RelativePath": "api/Res",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Restaurant, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "AddMenuItem",
+    "RelativePath": "api/Res/add-menu-item",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "menuitemdto",
+        "Type": "waytodine_sem9.Controllers.restaurant.MenuItemDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.MenuItem",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Res/allorders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "AssignDriver",
+    "RelativePath": "api/Res/assignDriver/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "waytodine_sem9.Controllers.restaurant.AssignDriverDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "orderId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllCategories",
+    "RelativePath": "api/Res/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Category, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetCategoryById",
+    "RelativePath": "api/Res/categories/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.Category",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "DeleteMenuItem",
+    "RelativePath": "api/Res/deleteitem/{itemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetFreeDeliveryPersons",
+    "RelativePath": "api/Res/freedeliverypersons",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.DeliveryPerson",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "getallfeedbacks",
+    "RelativePath": "api/Res/getallfeedbacks/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Feedback, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "getdeliverypersonbyid",
+    "RelativePath": "api/Res/getdeliverypersonbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.DeliveryPerson",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "getordercompleted",
+    "RelativePath": "api/Res/getordercompleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetOrderDeliverypersonAssigned",
+    "RelativePath": "api/Res/getorderdeliverypersonassigned",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetOrdersByRestaurant",
+    "RelativePath": "api/Res/GetOrdersByRestaurant/{restaurantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetRestaurantById",
+    "RelativePath": "api/Res/getrestaurantbyid/{restaurantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetUserById",
+    "RelativePath": "api/Res/getuserbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetItemById",
+    "RelativePath": "api/Res/MenuItem/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "waytodine_sem9.Models.restaurant.MenuItem",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllMenuitems",
+    "RelativePath": "api/Res/menuitems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.MenuItem, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "UpdateRestaurant",
+    "RelativePath": "api/Res/Updaterestaurant",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resdto",
+        "Type": "waytodine_sem9.Controllers.restaurant.RestaurantDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "UpdateRestaurantDetails",
+    "RelativePath": "api/Res/Updaterestaurantdetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "detailsDto",
+        "Type": "waytodine_sem9.Controllers.restaurant.RestaurantDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Res/updatestatus/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "waytodine_sem9.Controllers.restaurant.StatusChangeDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "orderId",
+        "Type": "",
         "IsRequired": true
       }
     ],

@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "F:\\MscIT\\sem9\\Project\\Backend\\waytodine_sem9\\waytodine_sem9\\wwwroot\\uploads\\South Indian_638692462908507663.jpg",
+      "PackagePath": "staticwebassets\\uploads\\South Indian_638692462908507663.jpg"
+    },
+    {
+      "Id": "F:\\MscIT\\sem9\\Project\\Backend\\waytodine_sem9\\waytodine_sem9\\wwwroot\\uploads\\dcfvgbh_638692469680783804.jpg",
+      "PackagePath": "staticwebassets\\uploads\\dcfvgbh_638692469680783804.jpg"
+    },
+    {
+      "Id": "F:\\MscIT\\sem9\\Project\\Backend\\waytodine_sem9\\waytodine_sem9\\wwwroot\\uploads\\dfghj_638692454536194693.jpg",
+      "PackagePath": "staticwebassets\\uploads\\dfghj_638692454536194693.jpg"
+    },
+    {
+      "Id": "F:\\MscIT\\sem9\\Project\\Backend\\waytodine_sem9\\waytodine_sem9\\wwwroot\\uploads\\dfghj_638692460117755510.jpg",
+      "PackagePath": "staticwebassets\\uploads\\dfghj_638692460117755510.jpg"
+    },
+    {
+      "Id": "F:\\MscIT\\sem9\\Project\\Backend\\waytodine_sem9\\waytodine_sem9\\wwwroot\\uploads\\sdfghjk_638692458092214320.jpg",
+      "PackagePath": "staticwebassets\\uploads\\sdfghjk_638692458092214320.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.waytodine_sem9.props",
+      "PackagePath": "build\\waytodine_sem9.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.waytodine_sem9.props",
+      "PackagePath": "buildMultiTargeting\\waytodine_sem9.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.waytodine_sem9.props",
+      "PackagePath": "buildTransitive\\waytodine_sem9.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.waytodine_sem9.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
