@@ -1,28 +1,32 @@
-# Stage 1: Build the .NET project
-FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
-WORKDIR /src
+# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Copy the project file and restore dependencies
-COPY ["waytodine_sem9/waytodine_sem9.csproj", "waytodine_sem9/"]
-RUN dotnet restore "./waytodine_sem9/waytodine_sem9.csproj"
+# Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
+# For more information, please see https://aka.ms/containercompat
 
-# Copy the remaining project files and build the project
-COPY . .
-WORKDIR "/src/waytodine_sem9"
-RUN dotnet build "./waytodine_sem9.csproj" -c Release -o /app/build
-
-# Stage 2: Publish the .NET project
-FROM build AS publish
-RUN dotnet publish "./waytodine_sem9.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# Stage 3: Run the .NET application in the runtime image
+# This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-# Copy the published application from the previous stage
-COPY --from=publish /app/publish .
 
-# Set the entry point for the application
+# This stage is used to build the service project
+FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["waytodine_sem9/waytodine_sem9.csproj", "waytodine_sem9/"]
+RUN dotnet restore "./waytodine_sem9/waytodine_sem9.csproj"
+COPY . .
+WORKDIR "/src/waytodine_sem9"
+RUN dotnet build "./waytodine_sem9.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+
+# This stage is used to publish the service project to be copied to the final stage
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./waytodine_sem9.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+
+# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "waytodine_sem9.dll"]
