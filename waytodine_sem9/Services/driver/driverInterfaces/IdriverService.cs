@@ -15,7 +15,7 @@ namespace waytodine_sem9.Services.driver.driverInterfaces
         Task<string> AcceptOrDeclineOrderAsync(int orderid, int driverid, Boolean acceptordecline);
         Task<ICollection<Order>> GetAcceptedOrdersAsync(int driverid);
         Task<ICollection<Order>> GetDeliveredOrdersAsync(int driverid);
-        Task<Order> GetOrderDetailsAsync(int orderid);
+        Task<object> GetOrderDetailsAsync(int orderid);
         Task<bool> VerifyOtpAndConfirmDelivery(int orderid, int driverid, string enteredOtp);
 
         //Task<object> GetDriverForLoginAsync(string username);

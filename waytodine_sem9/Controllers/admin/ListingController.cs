@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using waytodine_sem9.Models.admin;
 using waytodine_sem9.Services.admin.adminClasses;
 using waytodine_sem9.Services.admin.adminInterfaces;
@@ -28,6 +29,7 @@ namespace waytodine_sem9.Controllers.admin
         }
 
         [HttpPost("get-orders")]
+        [EnableCors("Allow")]
         public async Task<IActionResult> GetAllOrders([FromBody] PaginationDto paginationDto)
         {
             var orders = await _listingService.GetAllOrdersAsync(paginationDto.PageNumber, paginationDto.PageSize);
@@ -70,6 +72,17 @@ namespace waytodine_sem9.Controllers.admin
             }
             return Ok(users);
         }
+
+        [HttpPost("get-Restaurant-details")]
+        public async Task<IActionResult> GetRestaurantDetails([FromBody] RestauarntIdDto restauarntIdDto)
+        {
+            var details = await _listingService.GetRestaurantDetailsByIdAsync(restauarntIdDto.RestaurantId);
+            if (details == null)
+            {
+                return BadRequest("No RestauarntDEtails Found");
+            }
+            return Ok(details);
+        }
     }
     public class PaginationDto
     {
@@ -77,5 +90,12 @@ namespace waytodine_sem9.Controllers.admin
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
 
+    }
+
+    public class RestauarntIdDto
+    {
+
+        public int RestaurantId { get; set; }
+     
     }
 }

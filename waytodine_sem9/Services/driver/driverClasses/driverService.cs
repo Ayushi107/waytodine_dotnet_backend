@@ -95,14 +95,14 @@ namespace waytodine_sem9.Services.driver.driverClasses
         {
             return await _driverRepository.GetDeliveredOrders(driverid);
         }
-        public async Task<Order> GetOrderDetailsAsync(int orderid)
+        public async Task<object> GetOrderDetailsAsync(int orderid)
         {
             return await _driverRepository.GetOrderDetails(orderid);
         }
 
         public async Task<string> GenerateAndSendOTP(int orderid)
         {
-            var order = await _driverRepository.GetOrderDetails(orderid);
+            var order = await _driverRepository.GetOrderByid(orderid);
             var email = order.Customer.Email;
             if (order == null  || order.Customer == null)
             {
@@ -118,7 +118,7 @@ namespace waytodine_sem9.Services.driver.driverClasses
 
         public async Task<bool> VerifyOtpAndConfirmDelivery(int orderid, int driverid, string enteredOtp)
         {
-            var order = await _driverRepository.GetOrderDetails(orderid);
+            var order = await _driverRepository.GetOrderByid(orderid);
             var email = order.Customer.Email;
             if (order == null || order.Customer == null)
             {

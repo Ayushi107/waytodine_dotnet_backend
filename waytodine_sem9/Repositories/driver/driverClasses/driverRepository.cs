@@ -94,18 +94,83 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
             var deliveredOrders = await _context.Order.Include(o => o.Customer).Include(o => o.Restaurant).Include(o => o.CartItems).Where(o => o.DeliveryPersonId == driverid && o.IsAccept == true && o.OrderStatus == 4).ToListAsync();
             return deliveredOrders;
         }
-
-        public async Task<Order> GetOrderDetails(int orderid)
+        public async Task<Order> GetOrderByid(int orderid)
         {
             var orderDetails = await _context.Order
-             .Include(o => o.DeliveryPerson) // Include related DeliveryPerson data
-             .Include(o => o.Restaurant) // Include related Restaurant data
-             .Include(o => o.Customer) // Include related Customer data
-             .Include(o=>o.CartItems)
-             .FirstOrDefaultAsync(o => o.OrderId == orderid);
-
-            // Return the order details or null if not found
+            .Include(o => o.DeliveryPerson) // Include related DeliveryPerson data
+            .Include(o => o.Restaurant) // Include related Restaurant data
+            .Include(o => o.Customer) // Include related Customer data
+            .Include(o => o.CartItems)
+            .FirstOrDefaultAsync(o => o.OrderId == orderid);
             return orderDetails;
+        }
+
+        public async Task<object> GetOrderDetails(int orderid)
+        {
+           var orderDetails = await _context.Order
+        .Where(o => o.OrderId == orderid)
+        .Include(o => o.DeliveryPerson)
+        .Include(o => o.Restaurant)
+        .Include(o => o.Customer)
+        .Include(o => o.CartItems)
+        .Select(o => new
+        {
+            o.OrderId,
+            o.CustomerId,
+            o.RestaurantId,
+            o.DeliveryPersonId,
+            o.TotalAmount,
+            o.Discount,
+            o.OrderStatus,
+            o.PaymentStatus,
+            o.IsAccept,
+            o.pickupLocation,
+            o.dropoffLocation,
+            o.pickupCity,
+            o.dropoffCity,
+            o.CreatedAt,
+            o.UpdatedAt,
+            Customer = new
+            {
+                o.Customer.UserId,
+                o.Customer.FirstName,
+                o.Customer.LastName,
+                o.Customer.Email,
+                o.Customer.PhoneNumber,
+                o.Customer.Location
+            },
+            Restaurant = new
+            {
+                o.Restaurant.RestaurantId,
+                o.Restaurant.Name,
+                o.Restaurant.Location,
+                o.Restaurant.City,
+                o.Restaurant.Country
+            },
+            DeliveryPerson = o.DeliveryPerson == null ? null : new
+            {
+                o.DeliveryPerson.DeliveryPersonId,
+                o.DeliveryPerson.DriverName,
+                o.DeliveryPerson.DriverEmail,
+                o.DeliveryPerson.Phone,
+                o.DeliveryPerson.IsAvailable
+            },
+            CartItems = o.CartItems.Select(ci => new
+            {
+                ci.CartId,
+                ci.ItemId,
+                ci.Quantity,
+                ci.Items
+            }).ToList()
+        })
+        .FirstOrDefaultAsync();
+
+    if (orderDetails == null)
+    {
+        throw new Exception("Order not found.");
+    }
+
+    return orderDetails;
         }
 
 

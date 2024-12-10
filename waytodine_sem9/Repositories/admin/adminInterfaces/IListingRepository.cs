@@ -9,6 +9,7 @@ namespace waytodine_sem9.Repositories.admin.adminInterfaces
         Task<object> GetAllUsers(int pageNumber, int pageSize);
         Task<object> GetAllDrivers(int pageNumber, int pageSize);
         Task<object> GetAllMenus(int pageNumber, int pageSize);
+        Task<object> GetRestaurantDetailsById(int resid);
 
     }
 }

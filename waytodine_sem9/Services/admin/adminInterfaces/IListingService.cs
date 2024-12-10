@@ -9,6 +9,8 @@ namespace waytodine_sem9.Services.admin.adminInterfaces
         Task<object> GetAllUsersAsync(int pageNumber, int pageSize);
         Task<object> GetAllDriversAsync(int pageNumber, int pageSize);
         Task<object> GetAllMenusAsync(int pageNumber, int pageSize);
-      
+        Task<object> GetRestaurantDetailsByIdAsync(int resid);
+
+
     }
 }

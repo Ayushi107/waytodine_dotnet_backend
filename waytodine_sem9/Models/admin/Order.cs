@@ -44,16 +44,16 @@ namespace waytodine_sem9.Models.admin
         [Column("is_accept")]
         public Boolean IsAccept { get; set; } = false;
         [Column("pickup_location")]
-        private String pickupLocation;  // Geography/Point type
+        public string pickupLocation { get; set; }  // Geography/Point type
 
         [Column("dropoff_location")]
-        private String dropoffLocation; // Geography/Point type
+        public string dropoffLocation { get; set; }// Geography/Point type
 
         [Column("pickup_city")]
-        private String pickupCity;      // New field for pickup city
+        public string pickupCity { get; set; }      // New field for pickup city
 
         [Column("dropoff_city")]
-        private String dropoffCity;     // New field for dropoff city
+        public string dropoffCity { get; set; }    // New field for dropoff city
 
         [Column("created_at")]
             public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

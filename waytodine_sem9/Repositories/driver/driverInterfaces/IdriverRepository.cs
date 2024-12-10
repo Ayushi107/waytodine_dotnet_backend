@@ -13,7 +13,9 @@ namespace waytodine_sem9.Repositories.driver.driverInterfaces
         Task<string> AcceptOrDeclineOrder(int orderid, int driverid, Boolean acceptordecline);
         Task<ICollection<Order>> GetAcceptedOrders(int driverid);
         Task<ICollection<Order>> GetDeliveredOrders(int driverid);
-        Task<Order> GetOrderDetails(int orderid);
+        Task<object> GetOrderDetails(int orderid);
+        Task<Order> GetOrderByid(int orderid);
+
         Task<DeliveryPerson> GetDriverById(int driverid);
         Task<string> UpdateOrderStatus(int orderid);
 

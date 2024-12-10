@@ -119,6 +119,22 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         }
 
 
+        public async Task<object> GetRestaurantDetailsById(int resid)
+        {
+            var resataurantdetail = await _context.RestaurantDetails
+               .Where(rd => rd.RestaurantId == resid)
+               .Select(rd => new {
+                   rd.RestaurantId,
+                   rd.RestaurantDetailsId,
+                   rd.OpeningHoursWeekdays,
+                   rd.OpeningHoursWeekends,
+                   rd.CurrentOfferDiscountRate,
+                   rd.Specialities
+               }).ToListAsync();
+
+            return resataurantdetail;
+        }
+
         public async Task<object> GetAllUsers(int pageNumber, int pageSize)
         {
             var totalRecords = await _context.UserEntities.CountAsync();

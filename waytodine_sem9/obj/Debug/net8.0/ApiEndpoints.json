@@ -443,6 +443,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
+    "Method": "GetRestaurantDetails",
+    "RelativePath": "api/Listing/get-Restaurant-details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restauarntIdDto",
+        "Type": "waytodine_sem9.Controllers.admin.RestauarntIdDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.admin.ListingController",
     "Method": "GetAllRestaurants",
     "RelativePath": "api/Listing/get-Restaurants",
     "HttpMethod": "POST",

@@ -36,5 +36,11 @@ namespace waytodine_sem9.Services.admin.adminClasses
         {
             return await _listingRepository.GetAllMenus(pageNumber, pageSize);
         }
+
+        public async Task<object> GetRestaurantDetailsByIdAsync(int resid)
+        {
+            return await _listingRepository.GetRestaurantDetailsById(resid);
+        }
+
     }
 }
