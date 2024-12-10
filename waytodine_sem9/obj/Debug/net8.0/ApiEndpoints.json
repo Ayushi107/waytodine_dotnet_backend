@@ -379,6 +379,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
+    "Method": "Register",
+    "RelativePath": "api/Driver/register-driver",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDto",
+        "Type": "waytodine_sem9.Controllers.driver.DriverRegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.driver.DriverController",
     "Method": "UpdateDriverAvailabilityStatus",
     "RelativePath": "api/Driver/update-availability-status",
     "HttpMethod": "POST",

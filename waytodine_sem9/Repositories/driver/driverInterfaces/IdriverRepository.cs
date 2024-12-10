@@ -1,11 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using waytodine_sem9.Controllers.driver;
 using waytodine_sem9.Models.admin;
 
 namespace waytodine_sem9.Repositories.driver.driverInterfaces
 {
     public interface IdriverRepository
     {
-        Task<DeliveryPerson> AddDriver(DeliveryPerson driver);
+        Task<DeliveryPerson> AddDriver(DriverRegisterDto driver);
         Task<DeliveryPerson> GetByUsernameAndPasswordAsync(string username, string password);
         Task<DeliveryPerson> GetDriver();
         Task<DeliveryPerson> UpdateAvailabilityStatus(int driverid);

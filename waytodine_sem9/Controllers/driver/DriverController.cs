@@ -20,22 +20,22 @@ namespace waytodine_sem9.Controllers.driver
         }
 
 
-        //[HttpPost("register-driver")]
-        //public async Task<IActionResult> Register([FromBody] DriverRegisterDto registerDto)
-        //{
-        //    if (registerDto == null)
-        //    {
-        //        return BadRequest("Data required.");
-        //    }
+        [HttpPost("register-driver")]
+        public async Task<IActionResult> Register([FromBody] DriverRegisterDto registerDto)
+        {
+            if (registerDto == null)
+            {
+                return BadRequest("Data required.");
+            }
 
-        //    var admin = await _driverService(registerDto);
-        //    if (admin == null)
-        //    {
-        //        return StatusCode(500, "An error occurred while creating the admin.");
-        //    }
+            var driver = await _driverService.CreateDeliveryPersonAsync(registerDto);
+            if (driver == null)
+            {
+                return StatusCode(500, "An error occurred while creating the admin.");
+            }
 
-        //    return Ok(new { Message = "Admin registered successfully.", AdminId = admin.Id });
-        //}
+            return Ok(new { Message = "Driver registered successfully.", Driver = driver });
+        }
 
 
         [HttpPost("login")]
@@ -132,6 +132,18 @@ namespace waytodine_sem9.Controllers.driver
 
 
     }
+
+    public class DriverRegisterDto
+    {
+       public string VehicleType {  get; set; }
+            public string VehicleNumber { get; set; }
+        public string DrivingLicenseNumber { get; set; }
+        public string LicenseDocument { get; set; }
+        public string DriverName { get; set; }
+        public string DriverEmail { get; set; }
+        public string Phone {  get; set; }
+             public string Password { get; set; }
+}
 
     public class DriverLoginDto
     {

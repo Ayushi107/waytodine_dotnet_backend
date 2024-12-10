@@ -285,16 +285,6 @@ namespace waytodine_sem9.Controllers.restaurant
         [HttpPut("updateitem")]
         public async Task<IActionResult> UpdateMenuItem([FromBody] MenuItemUpdateDto menuItem)
         {
-            // Ensure the itemId from the URL matches the one in the request body
-           
-            //MenuItem m = new MenuItem();
-            //m.CategoryId = menuItem.CategoryId;
-            //m.Price = menuItem.price;
-            //m.Description = menuItem.Description;
-            //m.Name = menuItem.itemname;
-            //m.IsVeg = menuItem.isveg;
-            //m.Status = menuItem.status;
-
             try
             {
                 // Call repository method to update the item
@@ -439,7 +429,7 @@ namespace waytodine_sem9.Controllers.restaurant
         public int isveg { get; set; }
         public int price { get; set; }
         public int status { get; set; }
-
+        public string itemImage { get; set; }
         public int CategoryId { get; set; }
     }
     public class MenuItemDto

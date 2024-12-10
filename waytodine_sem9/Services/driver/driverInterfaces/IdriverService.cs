@@ -5,6 +5,7 @@ namespace waytodine_sem9.Services.driver.driverInterfaces
 {
     public interface IdriverService
     {
+        Task<DeliveryPerson> CreateDeliveryPersonAsync(DriverRegisterDto deliveryPerson);
         Task<object> LoginAsync(string username, string password);
         Task<DeliveryPerson> GetDriverByIdAsync(int driverid);
         Task<DeliveryPerson> GetProfileAsync();

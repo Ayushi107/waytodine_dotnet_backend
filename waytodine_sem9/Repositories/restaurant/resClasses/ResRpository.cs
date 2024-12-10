@@ -362,11 +362,13 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
                     throw new KeyNotFoundException("Category not found.");
                 }
             }
-
+            string imageFileName = SaveProfilePicFromBase64(menuItemDto.itemImage, menuItemDto.itemname);
+            menuItemDto.itemImage = imageFileName;
             // Map the DTO to the MenuItem entity
-            existingItem.Name = !string.IsNullOrWhiteSpace(menuItemDto.itemname) ? menuItemDto.itemname : existingItem.Name;
-            existingItem.Description = !string.IsNullOrWhiteSpace(menuItemDto.Description) ? menuItemDto.Description : existingItem.Description;
+            existingItem.Name = menuItemDto.itemname;
+            existingItem.Description = menuItemDto.Description;
             existingItem.IsVeg = menuItemDto.isveg;
+            existingItem.Price = menuItemDto.price;
             existingItem.Status = menuItemDto.status;
 
             // If CategoryId is provided, update it
@@ -375,14 +377,6 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
                 existingItem.CategoryId = menuItemDto.CategoryId;
             }
 
-            // Handle the image update if provided
-            //if (!string.IsNullOrEmpty(menuItemDto.ItemImage))
-            //{
-            //    string uploadedImageUrl = SaveProfilePicFromBase64(menuItemDto.ItemImage, menuItemDto.Name);
-            //    existingItem.ItemImage = uploadedImageUrl;
-            //}
-
-            // Save the changes to the database
             _context.MenuItem.Update(existingItem);
             await _context.SaveChangesAsync();
 

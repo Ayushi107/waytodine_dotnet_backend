@@ -11,6 +11,7 @@ using waytodine_sem9.Repositories.driver.driverInterfaces;
 using waytodine_sem9.Services.admin.adminInterfaces;
 using static System.Net.WebRequestMethods;
 using waytodine_sem9.Services.driver.driverInterfaces;
+using waytodine_sem9.Controllers.driver;
 
 namespace waytodine_sem9.Services.driver.driverClasses
 {
@@ -29,6 +30,13 @@ namespace waytodine_sem9.Services.driver.driverClasses
             _emailService = emailService;
             _memoryCache = memoryCache;
         }
+
+
+        public async Task<DeliveryPerson> CreateDeliveryPersonAsync(DriverRegisterDto deliveryPerson)
+        {
+            return await _driverRepository.AddDriver(deliveryPerson);
+        }
+
         public async Task<object> LoginAsync(string username, string password)
         {
             var driver = await _driverRepository.GetByUsernameAndPasswordAsync(username, password);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using waytodine_sem9.Controllers.driver;
 using waytodine_sem9.Data;
 using waytodine_sem9.Models.admin;
 using waytodine_sem9.Repositories.driver.driverInterfaces;
@@ -15,11 +16,22 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
             _context = context;
         }
 
-        public async Task<DeliveryPerson> AddDriver(DeliveryPerson driver)
+        public async Task<DeliveryPerson> AddDriver(DriverRegisterDto driverDto)
         {
-            await _context.DeliveryPerson.AddAsync(driver);
+            var newDriver = new DeliveryPerson
+            {
+                VehicleType = driverDto.VehicleType,
+                VehicleNumber = driverDto.VehicleNumber,
+                DrivingLicenseNumber = driverDto.DrivingLicenseNumber,
+                LicenseDocument = driverDto.LicenseDocument,
+                DriverName = driverDto.DriverName,
+                DriverEmail = driverDto.DriverEmail,
+                Phone = driverDto.Phone,
+                Password = driverDto.Password
+            };
+            await _context.DeliveryPerson.AddAsync(newDriver);
             await _context.SaveChangesAsync();
-            return driver;
+            return newDriver;
         }
 
         public async Task<DeliveryPerson> GetByUsernameAndPasswordAsync(string username, string password)
