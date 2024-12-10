@@ -17,6 +17,9 @@ namespace waytodine_sem9.Models.restaurant
         [Column("user_id")]
         public int userId { get; set; }
 
+        [Column("order_id")]
+        public int OrderId { get; set; }
+
 
         [Column("quantity")]
         public int quantity { get; set; }
@@ -27,7 +30,7 @@ namespace waytodine_sem9.Models.restaurant
 
 
         [Column("total_price")]
-        public int totalPrice {  get; set; }
+        public int totalPrice { get; set; }
 
 
         [Column("item_id")]
@@ -44,6 +47,9 @@ namespace waytodine_sem9.Models.restaurant
 
         [ForeignKey("restaurantId")]
         public Restaurant Restaurant { get; set; }
+
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
 
 
         [Column("created_at")]

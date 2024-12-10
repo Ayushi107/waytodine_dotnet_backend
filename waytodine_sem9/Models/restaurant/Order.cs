@@ -39,7 +39,7 @@ namespace waytodine_sem9.Models.restaurant
             public int PaymentStatus { get; set; } = 1;  // 1 = pending, 2 = completed, 3 = failed
 
             [Column("is_accept")]
-            public Boolean? IsAccept { get; set; } = false;
+            public Boolean IsAccept { get; set; } = false;
             
             [Column("dropoff_city")]
             public string DropOffCity {  get; set; }

@@ -537,12 +537,64 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
-    "Method": "GetAllOrders",
-    "RelativePath": "api/Res/allorders",
+    "Method": "GetAlldeliveryPerson",
+    "RelativePath": "api/Res/alldeliveryperson",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.DeliveryPerson, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Res/allordersbyresid/{resid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAlloutfordeliveryOrders",
+    "RelativePath": "api/Res/alloutfordeliveryorders/{resid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -559,6 +611,27 @@
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "AssignDriver",
     "RelativePath": "api/Res/assignDriver/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "waytodine_sem9.Controllers.restaurant.AssignDriverRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "AssignDriver",
+    "RelativePath": "api/Res/assignDriverdto/{orderId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -686,6 +759,32 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "getallisacceptorder",
+    "RelativePath": "api/Res/getallisacceptorder/{resid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "getdeliverypersonbyid",
     "RelativePath": "api/Res/getdeliverypersonbyid/{id}",
     "HttpMethod": "GET",
@@ -713,11 +812,17 @@
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "getordercompleted",
-    "RelativePath": "api/Res/getordercompleted",
+    "RelativePath": "api/Res/getordercompleted/{resid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -784,6 +889,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetRestaurantdetailsById",
+    "RelativePath": "api/Res/getrestaurantdetailsbyid/{restaurantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "GetUserById",
     "RelativePath": "api/Res/getuserbyid/{id}",
     "HttpMethod": "GET",
@@ -810,6 +931,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "LoginUser",
+    "RelativePath": "api/Res/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "waytodine_sem9.Controllers.restaurant.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "GetItemById",
     "RelativePath": "api/Res/MenuItem/{id}",
     "HttpMethod": "GET",
@@ -820,11 +957,6 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "resid",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -861,8 +993,71 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetMenuItemsByRestaurantId",
+    "RelativePath": "api/Res/menuitems/{restaurantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.MenuItem, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "UpdateMenuItem",
+    "RelativePath": "api/Res/updateitem/{itemId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "menuItem",
+        "Type": "waytodine_sem9.Controllers.restaurant.MenuItemUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "UpdateReadyOrderStatus",
+    "RelativePath": "api/Res/updatereadyorderstatus/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "UpdateRestaurant",
-    "RelativePath": "api/Res/Updaterestaurant",
+    "RelativePath": "api/Res/Updaterestaurant/{restaurantId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -871,6 +1066,11 @@
         "Name": "resdto",
         "Type": "waytodine_sem9.Controllers.restaurant.RestaurantDto",
         "IsRequired": true
+      },
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -878,7 +1078,7 @@
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "UpdateRestaurantDetails",
-    "RelativePath": "api/Res/Updaterestaurantdetails",
+    "RelativePath": "api/Res/Updaterestaurantdetails/{restaurantId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -886,6 +1086,11 @@
       {
         "Name": "detailsDto",
         "Type": "waytodine_sem9.Controllers.restaurant.RestaurantDetailsDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -900,13 +1105,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "waytodine_sem9.Controllers.restaurant.StatusChangeDto",
-        "IsRequired": true
-      },
-      {
         "Name": "orderId",
-        "Type": "",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

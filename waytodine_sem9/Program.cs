@@ -82,6 +82,8 @@ builder.Services.AddControllers()
        });
 
 
+
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -118,6 +120,8 @@ app.UseRouting();
 
 // Ensure CORS is set up before authorization
 app.UseCors("Allow");
+
+
 
 app.UseAuthorization();
 
