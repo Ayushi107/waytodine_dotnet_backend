@@ -39,7 +39,7 @@ namespace waytodine_sem9.Repositories.restaurant.resInterfaces
         Task<Order> UpdateOrderReady(int orderid);
         Task<RestaurantDetails> UpdateRestaurantDetailsAsync(RestaurantDetails details);
         Task<Restaurant> UpdateRestaurant(Restaurant restaurant);
-        Task<MenuItem> UpdateMenuitem(MenuItem menuItemDto);
+        Task<MenuItem> UpdateMenuitem(MenuItemUpdateDto menuItemDto);
         //getall with condition
         Task<List<Order>> GetOrderDeliverypersonAssigned();
         Task<List<DeliveryPerson>> GetFreeDeliveryPersons();

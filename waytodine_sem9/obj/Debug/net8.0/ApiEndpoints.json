@@ -1020,16 +1020,11 @@
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "UpdateMenuItem",
-    "RelativePath": "api/Res/updateitem/{itemId}",
+    "RelativePath": "api/Res/updateitem",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "itemId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
       {
         "Name": "menuItem",
         "Type": "waytodine_sem9.Controllers.restaurant.MenuItemUpdateDto",

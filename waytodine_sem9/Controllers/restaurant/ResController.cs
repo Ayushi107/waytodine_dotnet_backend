@@ -282,27 +282,23 @@ namespace waytodine_sem9.Controllers.restaurant
 
             return Ok("Restaurant updated successfully.");
         }
-        [HttpPut("updateitem/{itemId}")]
-        public async Task<IActionResult> UpdateMenuItem(int itemId, [FromBody] MenuItemUpdateDto menuItem)
+        [HttpPut("updateitem")]
+        public async Task<IActionResult> UpdateMenuItem([FromBody] MenuItemUpdateDto menuItem)
         {
             // Ensure the itemId from the URL matches the one in the request body
-            if (itemId != menuItem.itemid)
-            {
-                return BadRequest("Item ID mismatch.");
-            }
-            MenuItem m = new MenuItem();
-            m.CategoryId = menuItem.CategoryId;
-            m.Price = menuItem.price;
-            m.Description = menuItem.Description;
-            m.Name = menuItem.itemname;
-            m.ItemImage = menuItem.itemImage;
-            m.IsVeg = menuItem.isveg;
-            m.Status = menuItem.status;
+           
+            //MenuItem m = new MenuItem();
+            //m.CategoryId = menuItem.CategoryId;
+            //m.Price = menuItem.price;
+            //m.Description = menuItem.Description;
+            //m.Name = menuItem.itemname;
+            //m.IsVeg = menuItem.isveg;
+            //m.Status = menuItem.status;
 
             try
             {
                 // Call repository method to update the item
-                var updatedItem = await _resRepository.UpdateMenuitem(m);
+                var updatedItem = await _resRepository.UpdateMenuitem(menuItem);
 
                 // Return the updated item as confirmation
                 return Ok(updatedItem);
@@ -441,7 +437,6 @@ namespace waytodine_sem9.Controllers.restaurant
         public string itemname { get; set; }
         public string Description { get; set; }
         public int isveg { get; set; }
-        public string itemImage { get; set; }
         public int price { get; set; }
         public int status { get; set; }
 

@@ -345,9 +345,9 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
             return restaurant;
         }
 
-        public async Task<MenuItem> UpdateMenuitem(MenuItem menuItemDto)
+        public async Task<MenuItem> UpdateMenuitem(MenuItemUpdateDto menuItemDto)
         {
-            var existingItem = await _context.MenuItem.FirstOrDefaultAsync(m => m.ItemId == menuItemDto.ItemId);
+            var existingItem = await _context.MenuItem.FirstOrDefaultAsync(m => m.ItemId == menuItemDto.itemid);
             if (existingItem == null)
             {
                 throw new KeyNotFoundException("Menu item not found.");
@@ -364,10 +364,10 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
             }
 
             // Map the DTO to the MenuItem entity
-            existingItem.Name = !string.IsNullOrWhiteSpace(menuItemDto.Name) ? menuItemDto.Name : existingItem.Name;
+            existingItem.Name = !string.IsNullOrWhiteSpace(menuItemDto.itemname) ? menuItemDto.itemname : existingItem.Name;
             existingItem.Description = !string.IsNullOrWhiteSpace(menuItemDto.Description) ? menuItemDto.Description : existingItem.Description;
-            existingItem.IsVeg = menuItemDto.IsVeg;
-            existingItem.Status = menuItemDto.Status;
+            existingItem.IsVeg = menuItemDto.isveg;
+            existingItem.Status = menuItemDto.status;
 
             // If CategoryId is provided, update it
             if (menuItemDto.CategoryId > 0)
@@ -376,11 +376,11 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
             }
 
             // Handle the image update if provided
-            if (!string.IsNullOrEmpty(menuItemDto.ItemImage))
-            {
-                string uploadedImageUrl = SaveProfilePicFromBase64(menuItemDto.ItemImage, menuItemDto.Name);
-                existingItem.ItemImage = uploadedImageUrl;
-            }
+            //if (!string.IsNullOrEmpty(menuItemDto.ItemImage))
+            //{
+            //    string uploadedImageUrl = SaveProfilePicFromBase64(menuItemDto.ItemImage, menuItemDto.Name);
+            //    existingItem.ItemImage = uploadedImageUrl;
+            //}
 
             // Save the changes to the database
             _context.MenuItem.Update(existingItem);
