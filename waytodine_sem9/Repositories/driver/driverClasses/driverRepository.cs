@@ -110,9 +110,7 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
         {
             var orderDetails = await _context.Order
             .Include(o => o.DeliveryPerson) // Include related DeliveryPerson data
-            .Include(o => o.Restaurant) // Include related Restaurant data
             .Include(o => o.Customer) // Include related Customer data
-            .Include(o => o.CartItems)
             .FirstOrDefaultAsync(o => o.OrderId == orderid);
             return orderDetails;
         }
@@ -141,7 +139,6 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
             o.pickupCity,
             o.dropoffCity,
             o.CreatedAt,
-            o.UpdatedAt,
             Customer = new
             {
                 o.Customer.UserId,
@@ -190,20 +187,30 @@ namespace waytodine_sem9.Repositories.driver.driverClasses
         {
             return await _context.DeliveryPerson.Where(d => d.DeliveryPersonId == driverid).FirstOrDefaultAsync();
         }
-        public async Task<string> UpdateOrderStatus(int orderid)
+        public async Task<string> UpdateOrderStatus(int orderId)
         {
-            var order = await _context.Order.FirstOrDefaultAsync(o => o.OrderId == orderid);
+            var order = await _context.Order.FirstOrDefaultAsync(o => o.OrderId == orderId);
             if (order == null)
             {
                 return "Order not found.";
             }
+
+            order.OrderStatus = 4;
+            order.UpdatedAt = DateTime.UtcNow; // Ensure UpdatedAt is in UTC
+
+            _context.Order.Update(order);
+            await _context.SaveChangesAsync();
+            return "Order status updated.";
+        }
+
+        public async Task<string> NewUpdateOrderStatus(int orderid)
+        {
+            var order = await _context.Order.FirstOrDefaultAsync(o=> o.OrderId == orderid);
             order.OrderStatus = 4;
             _context.Order.Update(order);
             await _context.SaveChangesAsync();
-            return "Order status updated";
+            return "Order status update";
         }
-
-
 
         public async Task<DeliveryPerson> GetDriverForLogin(string username)
         {

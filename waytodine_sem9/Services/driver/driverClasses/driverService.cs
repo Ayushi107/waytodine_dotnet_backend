@@ -128,23 +128,21 @@ namespace waytodine_sem9.Services.driver.driverClasses
         {
             var order = await _driverRepository.GetOrderByid(orderid);
             var email = order.Customer.Email;
-            if (order == null || order.Customer == null)
+            if (order == null || email == null)
             {
                 return false;
             }
+            var result = await _driverRepository.UpdateOrderStatus(orderid);
 
             if (_memoryCache.TryGetValue($"Otp_{email}", out string cachedOtp) && cachedOtp == enteredOtp)
             {
-                var result = await _driverRepository.UpdateOrderStatus(orderid);
+
                 // Remove OTP after successful verification to avoid reuse
                 _memoryCache.Remove($"Otp_{email}");
-                if(result != null )
-                {
-                    return true;
-                }
-                return false;
+
             }
-            return false;
+            //await _driverRepository.UpdateAvailabilityStatus(orderid);
+            return true;
         }
 
 

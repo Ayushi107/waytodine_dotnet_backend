@@ -66,7 +66,6 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                     o.PaymentStatus,
                     o.IsAccept,
                     o.CreatedAt,
-                    o.UpdatedAt,
                     Restaurant = o.Restaurant != null ? new
                     {
                         o.Restaurant.RestaurantId,

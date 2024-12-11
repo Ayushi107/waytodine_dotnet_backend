@@ -162,39 +162,39 @@ namespace waytodine_sem9.Services.admin.adminClasses
 
         public async Task<bool> VerifyRestaurantAsync(int resid)
         {
+            string loginUrl = "https://waytodine-restaurant-frontend.onrender.com/";
+            const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            Random random = new Random();
+
+            // Generate a random number
+            string numericPart = random.Next(100000, 999999).ToString();
+
+            // Add random characters to the code
+            string charPart = new string(Enumerable.Repeat(validChars, 4)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            string password = numericPart + charPart;
+
+            // Update the restaurant with the new password and status
             var email = await _adminRepository.VerifyRestaurant(resid);
             if (email == null)
             {
                 return false;
             }
-            else
-            {
-                string loginUrl = "https://waytodine-restaurant-frontend.onrender.com/";
-                const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-                Random random = new Random();
 
-                // Generate a random number
-                string numericPart = random.Next(100000, 999999).ToString();
+            // Prepare email content
+            string emailMessage = $@"
+<h3>Welcome to Our Platform!</h3>
+<p>Your account has been verified and you can now log in.</p>
+<p><b>Login Link:</b> <a href='{loginUrl}'>{loginUrl}</a></p>
+<p><b>Your Temporary Password:</b> {password}</p>
+<p>We recommend changing your password after logging in.</p>
+";
 
-                // Add random characters to the code
-                string charPart = new string(Enumerable.Repeat(validChars, 4)
-                    .Select(s => s[random.Next(s.Length)]).ToArray());
-                string password = numericPart + charPart;
+            // Send email with the new password
+            await _emailService.SendEmailAsync(email, "Verification update", emailMessage);
+            await _adminRepository.UpdateResPassword(resid, password);
 
-                string emailMessage = $@"
-                {email}
-                <h3>Welcome to Our Platform!</h3>
-                <p>Your account has been verified and you can now log in.</p>
-                <p><b>Login Link:</b> <a href='{loginUrl}'>{loginUrl}</a></p>
-                <p><b>Your Temporary Password:</b> {password}</p>
-                <p>We recommend changing your password after logging in.</p>
-                ";
-
-                await _adminRepository.UpdateResPassword(resid, password);
-
-                await _emailService.SendEmailAsync(email, "Verification update", emailMessage);
-                return true;
-            }
+            return true;
         }
 
 

@@ -93,20 +93,27 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
 
         public async Task<string> VerifyRestaurant(int id)
         {
+            // Fetch the restaurant entity
             var restaurant = await _context.restaurants
-                  .FirstOrDefaultAsync(r => r.RestaurantId == id);
+                .FirstOrDefaultAsync(r => r.RestaurantId == id);
+
             if (restaurant == null)
             {
-                return null; 
+                return null;
             }
+
+            // Update the password and status
             restaurant.Status = 1;
+
+            // Update the restaurant entity in the database
             _context.restaurants.Update(restaurant);
             await _context.SaveChangesAsync();
-            string email = restaurant.Email;
-            return email;
 
 
+
+            return restaurant.Email; // Return the email for further processing
         }
+
 
         public async Task<string> VerifyDriver(int id)
         {

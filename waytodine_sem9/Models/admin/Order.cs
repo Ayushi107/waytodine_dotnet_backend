@@ -56,13 +56,13 @@ namespace waytodine_sem9.Models.admin
         public string dropoffCity { get; set; }    // New field for dropoff city
 
         [Column("created_at")]
-            public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-            [Column("updated_at")]
-            public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
+        [Column("updated_at")]
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-            // Navigation Properties
-            [ForeignKey("RestaurantId")]
+        // Navigation Properties
+        [ForeignKey("RestaurantId")]
             public Restaurant Restaurant { get; set; }
 
             [ForeignKey("CustomerId")]

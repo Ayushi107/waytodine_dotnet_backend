@@ -21,6 +21,7 @@ namespace waytodine_sem9.Repositories.driver.driverInterfaces
         Task<string> UpdateOrderStatus(int orderid);
 
         Task<DeliveryPerson> GetDriverForLogin(string username);
+        Task<string> NewUpdateOrderStatus(int orderid);
     }
 
 }
