@@ -24,6 +24,11 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                     r.RestaurantId,
                     r.Name,
                     r.Location,
+                    r.Status,
+                    r.Country,
+                    r.City,
+                    r.Email,
+                    r.RestaurantDocument,
                     RestaurantDetails = r.RestaurantDetails ?? new List<RestaurantDetails>()  // Handle null details
                 })
                 .Skip((pageNumber - 1) * pageSize)
