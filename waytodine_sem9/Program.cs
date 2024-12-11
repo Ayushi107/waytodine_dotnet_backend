@@ -36,13 +36,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Allow", policyBuilder =>
     {
-        policyBuilder.WithOrigins(
-            "https://waytodine-restaurant-frontend.onrender.com",
-            "https://waytodine-deliveryperson-frontend.onrender.com",
-            "https://waytodine-admin-frontend.onrender.com"
-        )
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+        policyBuilder.WithOrigins("*")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+                     //.AllowCredentials();
+
     });
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
