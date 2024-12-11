@@ -119,8 +119,12 @@ app.UseRouting();
 //app.UseStaticFiles();
 
 // Ensure CORS is set up before authorization
-app.UseCors("Allow");
-
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
 
 app.UseAuthorization();

@@ -52,6 +52,8 @@ namespace waytodine_sem9.Controllers.admin
         }
 
         [HttpPost("get-Users")]
+        [EnableCors("Allow")]
+
         public async Task<IActionResult> GetAllUsers([FromBody] PaginationDto paginationDto)
         {
             var users = await _listingService.GetAllUsersAsync(paginationDto.PageNumber, paginationDto.PageSize);
@@ -74,6 +76,8 @@ namespace waytodine_sem9.Controllers.admin
         }
 
         [HttpPost("get-Restaurant-details")]
+        [EnableCors("Allow")]
+
         public async Task<IActionResult> GetRestaurantDetails([FromBody] RestauarntIdDto restauarntIdDto)
         {
             var details = await _listingService.GetRestaurantDetailsByIdAsync(restauarntIdDto.RestaurantId);
