@@ -169,7 +169,7 @@ namespace waytodine_sem9.Services.admin.adminClasses
             }
             else
             {
-                string loginUrl = "https://localhost:3000";
+                string loginUrl = "https://waytodine-restaurant-frontend.onrender.com/";
                 const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                 Random random = new Random();
 
@@ -205,7 +205,7 @@ namespace waytodine_sem9.Services.admin.adminClasses
             }
             else
             {
-                string loginUrl = "https://localhost:3000";
+                string loginUrl = "https://waytodine-deliveryperson-frontend.onrender.com/register";
                 const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                 Random random = new Random();
 
