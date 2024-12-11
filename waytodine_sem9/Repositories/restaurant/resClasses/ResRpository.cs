@@ -87,7 +87,7 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
 
         public async Task<List<Order>> GetAllOrders(int resid)
         {
-            return await _context.Order.Where(o => o.RestaurantId == resid && o.IsAccept == true).ToListAsync();
+            return await _context.Order.Where(o => o.RestaurantId == resid).ToListAsync();
         }
         public async Task<List<Order>> Getalloutfordeliveryorders(int resid)
         {

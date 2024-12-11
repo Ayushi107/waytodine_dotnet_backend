@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("waytodine_sem9")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32e2e053425b1b33880afb0d431dd7311cc2ca5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a033b32e07cb8a747233d7e0191d301a5217bf0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("waytodine_sem9")]
 [assembly: System.Reflection.AssemblyTitleAttribute("waytodine_sem9")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
