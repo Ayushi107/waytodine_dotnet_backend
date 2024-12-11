@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 using waytodine_sem9.Data;
 using waytodine_sem9.Models.admin;
 using waytodine_sem9.Repositories.admin.adminInterfaces;
@@ -151,9 +152,23 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         {
             var totalRecords = await _context.UserEntities.CountAsync();
             var users = await _context.UserEntities
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+         .Select(user => new
+         {
+             user.UserId,
+            user.FirstName,
+             user.LastName, // Combine first and last name
+             user.Email,
+             profilePic = user.ProfilePic ?? string.Empty, // Default to empty string if null
+             Location = user.Location ?? "Unknown",        // Default location if null
+             phoneNumber = user.PhoneNumber ?? string.Empty,
+             user.Status,                        // No change if status is an int
+              user.CreatedAt, // Format datetime
+             user.UpdatedAt // Format datetime
+         })
+         .Skip((pageNumber - 1) * pageSize)
+         .Take(pageSize)
+         .ToListAsync();
+
 
             return new
             {
@@ -173,8 +188,8 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                 .Select(m => new
                 {
                     m.ItemId,
-                    m.Name,
-                    m.Description,
+                    name = m.Name ?? string.Empty,
+                    description = m.Description ?? string.Empty,
                     m.Price,
                     m.ItemImage,
                     m.Status,
