@@ -21,10 +21,10 @@ namespace waytodine_sem9.Controllers.admin
         public async Task<IActionResult> GetAllRestaurants([FromBody] PaginationDto paginationDto)
         {
             var restaurnats = await _listingService.GetAllRestaurantAsync(paginationDto.PageNumber,paginationDto.PageSize);
-            if (restaurnats == null)
-            {
-                return BadRequest("No Restaurants Found");
-            }
+            //if (restaurnats == null)
+            //{
+            //    return BadRequest("No Restaurants Found");
+            //}
             return Ok(restaurnats);
         }
 
@@ -33,10 +33,10 @@ namespace waytodine_sem9.Controllers.admin
         public async Task<IActionResult> GetAllOrders([FromBody] PaginationDto paginationDto)
         {
             var orders = await _listingService.GetAllOrdersAsync(paginationDto.PageNumber, paginationDto.PageSize);
-            if (orders == null)
-            {
-                return BadRequest("No Orders Found");
-            }
+            //if (orders == null)
+            //{
+            //    return BadRequest("No Orders Found");
+            //}
             return Ok(orders);
         }
 
@@ -57,10 +57,10 @@ namespace waytodine_sem9.Controllers.admin
         public async Task<IActionResult> GetAllUsers([FromBody] PaginationDto paginationDto)
         {
             var users = await _listingService.GetAllUsersAsync(paginationDto.PageNumber, paginationDto.PageSize);
-            if (users == null)
-            {
-                return BadRequest("No Users Found");
-            }
+            //if (users == null)
+            //{
+            //    return BadRequest("No Users Found");
+            //}
             return Ok(users);
         }
 
