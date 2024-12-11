@@ -5,7 +5,7 @@ using waytodine_sem9.Repositories.admin.adminInterfaces;
 
 namespace waytodine_sem9.Repositories.admin.adminClasses
 {
-    public class ListingRepository:IListingRepository
+    public class ListingRepository : IListingRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -14,12 +14,18 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             _context = context;
         }
 
-
         public async Task<object> GetAllRestaurant(int pageNumber, int pageSize)
         {
             var totalRecords = await _context.restaurants.CountAsync();
             var restaurants = await _context.restaurants
                 .Include(r => r.RestaurantDetails)
+                .Select(r => new
+                {
+                    r.RestaurantId,
+                    r.Name,
+                    r.Location,
+                    RestaurantDetails = r.RestaurantDetails ?? new List<RestaurantDetails>()  // Handle null details
+                })
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -42,8 +48,6 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                 .Include(o => o.Restaurant)
                 .Include(o => o.Customer)
                 .Include(o => o.CartItems)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
                 .Select(o => new
                 {
                     o.OrderId,
@@ -57,7 +61,7 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                     o.IsAccept,
                     o.CreatedAt,
                     o.UpdatedAt,
-                    Restaurant = new
+                    Restaurant = o.Restaurant != null ? new
                     {
                         o.Restaurant.RestaurantId,
                         o.Restaurant.Name,
@@ -69,8 +73,8 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                         o.Restaurant.Status,
                         o.Restaurant.CreatedAt,
                         o.Restaurant.UpdatedAt
-                    },
-                    Customer = new
+                    } : null,
+                    Customer = o.Customer != null ? new
                     {
                         o.Customer.UserId,
                         o.Customer.FirstName,
@@ -82,31 +86,33 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                         o.Customer.ProfilePic,
                         o.Customer.CreatedAt,
                         o.Customer.UpdatedAt
-                    },
+                    } : null,
                     CartItems = _context.CartItems
-                .Where(c => c.OrderId == o.OrderId)
-                .Select(c => new
-                {
-                    c.CartId,
-                    c.CustomerId,
-                    c.Quantity,
-                    c.Status,
-                    c.Total,
-                    c.ItemId,
-                    c.RestaurantId,
-                    c.CreatedAt,
-                    c.UpdatedAt,
-                    Item = new
-                    {
-                        c.Items.ItemId,
-                        c.Items.Name,
-                        c.Items.Price,
-                        c.Items.Description,
-                        c.Items.ItemImage
-                    }
-                }).ToList()
+                        .Where(c => c.OrderId == o.OrderId)
+                        .Select(c => new
+                        {
+                            c.CartId,
+                            c.CustomerId,
+                            c.Quantity,
+                            c.Status,
+                            c.Total,
+                            c.ItemId,
+                            c.RestaurantId,
+                            c.CreatedAt,
+                            c.UpdatedAt,
+                            Item = c.Items != null ? new
+                            {
+                                c.Items.ItemId,
+                                c.Items.Name,
+                                c.Items.Price,
+                                c.Items.Description,
+                                c.Items.ItemImage
+                            } : null
+                        }).ToList()
                 })
-        .ToListAsync();
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
             return new
             {
@@ -118,21 +124,22 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             };
         }
 
-
         public async Task<object> GetRestaurantDetailsById(int resid)
         {
-            var resataurantdetail = await _context.RestaurantDetails
-               .Where(rd => rd.RestaurantId == resid)
-               .Select(rd => new {
-                   rd.RestaurantId,
-                   rd.RestaurantDetailsId,
-                   rd.OpeningHoursWeekdays,
-                   rd.OpeningHoursWeekends,
-                   rd.CurrentOfferDiscountRate,
-                   rd.Specialities
-               }).ToListAsync();
+            var restaurantDetails = await _context.RestaurantDetails
+                .Where(rd => rd.RestaurantId == resid)
+                .Select(rd => new
+                {
+                    rd.RestaurantId,
+                    rd.RestaurantDetailsId,
+                    rd.OpeningHoursWeekdays,
+                    rd.OpeningHoursWeekends,
+                    rd.CurrentOfferDiscountRate,
+                    rd.Specialities
+                })
+                .ToListAsync();
 
-            return resataurantdetail;
+            return restaurantDetails;
         }
 
         public async Task<object> GetAllUsers(int pageNumber, int pageSize)
@@ -153,14 +160,11 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
             };
         }
 
-
         public async Task<object> GetAllMenus(int pageNumber, int pageSize)
         {
             var totalRecords = await _context.MenuItem.CountAsync();
             var menus = await _context.MenuItem
-                .Include(m=>m.Category)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
+                .Include(m => m.Category)
                 .Select(m => new
                 {
                     m.ItemId,
@@ -170,12 +174,14 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
                     m.ItemImage,
                     m.Status,
                     m.IsVeg,
-                    Category = new
+                    Category = m.Category != null ? new
                     {
                         m.Category.CategoryId,
-                        m.Category.CategoryName,
-                    }
+                        m.Category.CategoryName
+                    } : null
                 })
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             return new
