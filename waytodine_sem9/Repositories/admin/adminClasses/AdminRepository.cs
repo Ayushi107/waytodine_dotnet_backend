@@ -125,5 +125,21 @@ namespace waytodine_sem9.Repositories.admin.adminClasses
         }
 
 
+        public async Task<Restaurant> UpdateResPassword(int resid, string password)
+            {
+
+            var res = await _context.restaurants
+                  .FirstOrDefaultAsync(r => r.RestaurantId == resid);
+            if (res == null)
+            {
+                return null;
+            }
+            res.Password = password;
+            _context.restaurants.Update(res);
+            await _context.SaveChangesAsync();
+            return res;
+
+        }
+
     }
 }

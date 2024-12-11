@@ -190,6 +190,8 @@ namespace waytodine_sem9.Services.admin.adminClasses
                 <p>We recommend changing your password after logging in.</p>
                 ";
 
+                await _adminRepository.UpdateResPassword(resid, password);
+
                 await _emailService.SendEmailAsync(email, "Verification update", emailMessage);
                 return true;
             }

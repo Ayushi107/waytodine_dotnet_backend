@@ -17,6 +17,8 @@ namespace waytodine_sem9.Repositories.admin.adminInterfaces
         Task<string> VerifyRestaurant(int id);
         Task<string> VerifyDriver(int id);
 
+        Task<Restaurant> UpdateResPassword(int resid, string password);
+
 
     }
 }

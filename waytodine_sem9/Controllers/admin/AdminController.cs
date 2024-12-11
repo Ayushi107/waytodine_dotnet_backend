@@ -131,7 +131,7 @@ namespace waytodine_sem9.Controllers.admin
             }
             else
             {
-                return NotFound("Something went wrong while verifiying, check your email");
+                return NotFound("Something went wrong while verifiying, check your Restauarnt Id");
             }
 
 
