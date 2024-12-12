@@ -553,6 +553,22 @@
   },
   {
     "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "AddRestaurantDetails",
+    "RelativePath": "api/Res/add-restaurantdetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "detailsDto",
+        "Type": "waytodine_sem9.Controllers.restaurant.RestaurantDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
     "Method": "GetAlldeliveryPerson",
     "RelativePath": "api/Res/alldeliveryperson",
     "HttpMethod": "GET",
@@ -790,6 +806,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Models.restaurant.Order, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "waytodine_sem9.Controllers.restaurant.ResController",
+    "Method": "GetAllOrderstatusnew",
+    "RelativePath": "api/Res/GetAllOrderstatusnew/{resid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[waytodine_sem9.Controllers.restaurant.neworderDTO, waytodine_sem9, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

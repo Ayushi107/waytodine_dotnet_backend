@@ -291,6 +291,27 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
         }
 
 
+        public async Task<RestaurantDetails> AddResturantDetails(RestaurantDetailsDto d)
+  {
+      string imageFileName = SaveProfilePicFromBase64(d.BannerImage, d.Mission);
+     
+      var restaurantDetails = new RestaurantDetails
+      {
+          RestaurantId = d.RestaurantId,
+          BannerImage = imageFileName,
+          Description = d.description,
+          CurrentOfferDiscountRate = d.CurrentOfferDiscountRate,
+          Mission = d.Mission,
+          OpeningHoursWeekdays = d.OpeningHoursWeekdays,
+          OpeningHoursWeekends = d.OpeningHoursWeekends,
+          Specialities = d.Specialities
+      };
+
+      _context.RestaurantDetails.Add(restaurantDetails);
+      await _context.SaveChangesAsync();
+      return restaurantDetails;
+  }
+
 
         public async Task<List<RestaurantDTO>> GetOrdersByRestaurantAsync(int restaurantId)
         {
@@ -298,31 +319,44 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
                 .Where(c => c.restaurantId == restaurantId)
                 .Include(c => c.Restaurant)
                 .Include(c => c.Customer)
-                .Include(c => c.Order)
+                .Include(c => c.Order) // Include the Order entity
                 .GroupBy(c => new { c.restaurantId, c.Restaurant.Name })
                 .Select(group => new RestaurantDTO
                 {
                     RestaurantId = group.Key.restaurantId,
-                    RestaurantName = group.Key.Name,
+                    RestaurantName = group.Key.Name != null ? group.Key.Name : "Unknown", // Handle null
                     Orders = group.GroupBy(o => o.OrderId) // Group by OrderId
-                                  .Select(orderGroup => new OrderDTO
-                                  {
-                                      CartId = orderGroup.First().CartId,
-                                      OrderId = orderGroup.Key, // Use OrderId as the grouping key
-                                      UserId = orderGroup.First().userId,
-                                      Username = orderGroup.First().Customer.FirstName,
-                                      CreatedAt = orderGroup.First().CreatedAt,
-                                      TotalPrice = orderGroup.Sum(o => o.totalPrice),
-                                      OrderStatus = orderGroup.First().status,
-                                      PaymentStatus = orderGroup.First().status,
-                                      IsAccept = orderGroup.First().Order.IsAccept,// Assuming PaymentStatus is stored similarly
-                                      Items = orderGroup.Select(i => new OrderItemDTO
-                                      {
-                                          ItemId = i.itemId,
-                                          Quantity = i.quantity,
-                                          Price = i.totalPrice
-                                      }).ToList()
-                                  }).ToList()
+                        .Select(orderGroup => new OrderDTO
+                        {
+                            CartId = orderGroup.First().CartId,
+                            OrderId = orderGroup.Key, // Use OrderId as the grouping key
+                            UserId = orderGroup.First().userId,
+                            Username = orderGroup.First().Customer != null
+                                ? orderGroup.First().Customer.FirstName
+                                : "Guest", // Handle null
+                            CreatedAt = orderGroup.First().CreatedAt,
+                            TotalPrice = orderGroup.Sum(o => o.totalPrice),
+                            OrderStatus = orderGroup.First().Order != null
+                                ? orderGroup.First().Order.OrderStatus
+                                : 1, // Default to 1
+                            PaymentStatus = orderGroup.First().Order != null
+                                ? orderGroup.First().Order.PaymentStatus
+                                : 1, // Default to 1
+                            IsAccept = orderGroup.First().Order != null
+                                ? orderGroup.First().Order.IsAccept
+                                : false, // Default to false
+                            DeliveryPersonId = orderGroup.First().Order != null
+                                ? (orderGroup.First().Order.DeliveryPersonId.HasValue
+                                    ? orderGroup.First().Order.DeliveryPersonId.Value
+                                    : (int?)null)
+                                : (int?)null, // Handle null
+                            Items = orderGroup.Select(i => new OrderItemDTO
+                            {
+                                ItemId = i.itemId,
+                                Quantity = i.quantity,
+                                Price = i.totalPrice
+                            }).ToList()
+                        }).ToList()
                 }).ToListAsync();
 
             return groupedOrders;
@@ -402,5 +436,26 @@ namespace waytodine_sem9.Repositories.restaurant.resClasses
             return true;
         }
 
+
+        public async Task<List<neworderDTO>> GetAllOrderstatusnew(int resid)
+        {
+            return await _context.Order
+                .Where(o => o.RestaurantId == resid)
+                .Select(o => new neworderDTO
+                {
+                    OrderId = o.OrderId,
+                    UserId = o.UserId,
+                    Username = _context.Users
+                        .Where(u => u.UserId == o.UserId)
+                        .Select(u => u.FirstName)
+                        .FirstOrDefault() ?? "Unknown", // Default to "Unknown" if user not found
+                    CreatedAt = o.CreatedAt,
+                    TotalAmount = o.TotalAmount,
+                    IsAccept = o.IsAccept,
+                    OrderStatus = o.OrderStatus,
+                    DeliveryPersonId = o.DeliveryPersonId
+                })
+                .ToListAsync();
+        }
     }
 }

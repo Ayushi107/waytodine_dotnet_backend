@@ -50,5 +50,9 @@ namespace waytodine_sem9.Repositories.restaurant.resInterfaces
         Task<bool> DeleteMenuItem(int itemId);
         Task<List<MenuItem>> GetMenuItemsByRestaurantId(int restaurantId);
 
+
+        Task<RestaurantDetails> AddResturantDetails(RestaurantDetailsDto d);
+        Task<List<neworderDTO>> GetAllOrderstatusnew(int resid);
+
     }
 }

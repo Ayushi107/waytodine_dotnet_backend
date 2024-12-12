@@ -351,6 +351,48 @@ namespace waytodine_sem9.Controllers.restaurant
             });
         }
 
+
+
+        [HttpPost("add-restaurantdetails")]
+        public async Task<ActionResult> AddRestaurantDetails([FromBody] RestaurantDetailsDto detailsDto)
+        {
+            // Check if the incoming data is null
+            if (detailsDto == null)
+                return BadRequest("Invalid data.");
+
+            try
+            {
+                // Call the repository/service method to add restaurant details
+                var addedItem = await _resRepository.AddResturantDetails(detailsDto);
+
+                if (addedItem != null)
+                {
+                    return Ok(new
+                    {
+                        Message = "Restaurant details added successfully.",
+                        Data = addedItem
+                    });
+                }
+
+                // Handle a case where the repository method fails to return an added item
+                return StatusCode(500, "An error occurred while adding restaurant details.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if logging is configured
+                // LogError(ex);
+
+                return StatusCode(500, $"An unexpected error occurred: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetAllOrderstatusnew/{resid}")]
+        public async Task<ActionResult<List<neworderDTO>>> GetAllOrderstatusnew(int resid)
+        {
+            var neworders = await _resRepository.GetAllOrderstatusnew(resid);
+            return Ok(neworders);
+        }
+
     }
     public class AssignDriverRequest
     {
@@ -359,12 +401,13 @@ namespace waytodine_sem9.Controllers.restaurant
     public class RestaurantDto
     {
         public int RestaurantId { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Location { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string RestaurantDocument { get; set; }
+        public string Email { get; set; } = string.Empty; // Default to empty string
+        public string PhoneNumber { get; set; } = string.Empty; // Default to empty string
+        public string Location { get; set; } = string.Empty; // Default to empty string
+        public string City { get; set; } = string.Empty; // Default to empty string
+        public string Country { get; set; } = string.Empty; // Default to empty string
+        public string RestaurantDocument { get; set; } = string.Empty; // Default to empty string
+
     }
     public class RestaurantDetailsDto
     {
@@ -396,7 +439,19 @@ namespace waytodine_sem9.Controllers.restaurant
         public bool IsAccept { get; set; }
         public int OrderStatus { get; set; }
         public int PaymentStatus { get; set; }
+        public int? DeliveryPersonId { get; set; }
         public List<OrderItemDTO> Items { get; set; }
+    }
+    public class neworderDTO
+    {
+        public int OrderId { get; set; }
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public decimal TotalAmount { get; set; }
+        public bool IsAccept { get; set; }
+        public int OrderStatus { get; set; }
+        public int? DeliveryPersonId { get; set; }
     }
     public class RestaurantDTO
     {
